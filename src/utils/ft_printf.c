@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:29:04 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/26 15:24:27 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:46:19 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,24 @@ static int	ft_write_upto(const char *s, char endchar)
 	return (ret);
 }
 
-static int ft_handler(char type, void *arg)
+static int ft_handler(char type, va_list args)
 {
 	if (type == 'c')
-		return (ft_putchar(arg));
+		return (ft_putchar(va_arg(args, char)));
 	if (type == 's')
-		return (ft_putstr(arg));
+		return (ft_putstr(va_arg(args, char *)));
 	if (type == 'p')
-		return (ft_voidp_writer(arg));
+		return (ft_voidp_writer(va_arg(args, void *)));
 	if (type == '%')
 		return (write(1, "%", 1));
-	if (!arg)
-		return (write(1, "0", 1));
 	if (type == 'i' || type == 'd')
-		return (ft_putnbr_base((int)arg, "0123456789", 10));
+		return (ft_putnbr_base(va_arg(args, int), "0123456789", 10));
 	if (type == 'u')
-		return (ft_putnbr_base((unsigned int)arg, "0123456789", 10));
+		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789", 10));
 	if (type == 'x')
-		return (ft_putnbr_base((unsigned int)arg, "0123456789abcdef", 10));
+		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef", 10));
 	if (type == 'X')
-		return (ft_putnbr_base((unsigned int)arg, "0123456789ABCDEF", 10));
+		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF", 10));
 	return (0);
 }
 
@@ -58,7 +56,7 @@ int	ft_printf(const char *s, ...)
 	if (!s[index - 1])
 		return (index - 1);
 	if (s[index])
-		ft_handler(s[index], va_arg(args, void *));
+		ft_handler(s[index], args);
 	return (0);
 }
 
@@ -66,8 +64,8 @@ int main()
 {
 	void *test;
 	
-	printf("test %x", -218);
+	printf("test %X", -218);
 	printf("\n");
-	ft_printf("test %x", -218);
+	ft_printf("test %X", -218);
 	return (0);
 }
