@@ -1,5 +1,7 @@
-#include <stdarg.h>
-#include <unistd.h>
+# include <stdarg.h>
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 void	test(char *s, ...)
 {
@@ -15,7 +17,38 @@ void	test(char *s, ...)
 	}
 }
 
+
+
 int main()
 {
-	test("abcde", "hello ", "world ");
+	void *argument;
+	int j;
+
+	printf("c : ");
+	j = printf("%c", NULL);
+	printf(", result : %i \n", j);
+	printf("s : ");
+	j = printf("%s", NULL);
+	printf(", result : %i \n", j);
+	printf("p : ");
+	j = printf("%p", NULL);
+	printf(", result : %i \n", j);
+	printf("d : ");
+	j = printf("%d", NULL);
+	printf(", result : %i \n", j);
+	printf("i : ");
+	j = printf("%i", NULL);
+	printf(", result : %i \n", j);
+	printf("u : ");
+	j = printf("%u", NULL);
+	printf(", result : %i \n", j);
+	printf("x : ");
+	j = printf("%x", NULL);
+	printf(", result : %i \n", j);
+	printf("X : ");
+	j = printf("%X", NULL);
+	printf(", result : %i \n", j);
+	printf("%% : ");
+	j = printf("%%", NULL);
+	printf(", result : %i \n", j);
 }
