@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:36:37 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/26 15:38:58 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:47:29 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static ssize_t	ft_abs(ssize_t n)
 	return (n);
 }
 
-int	ft_putnbr_base(ssize_t n, char *str_base, int base)
+int	ft_putnbr(ssize_t n, char *str_base, int base)
 {
 	int	div;
 	int	mod;
-	int ret;
-	int sign;
+	int	ret;
+	int	sign;
 
 	sign = 0;
 	if (n < 0)
@@ -50,7 +50,7 @@ int	ft_putnbr_base(ssize_t n, char *str_base, int base)
 	mod = ft_abs(n % base);
 	if (div == 0)
 		return (write(1, &str_base[mod], 1));
-	ret = ft_putnbr_base(div, str_base, base);
+	ret = ft_putnbr(div, str_base, base);
 	write(1, &str_base[mod], 1);
 	return (ret + 1 + sign);
 }

@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:29:04 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/26 16:46:19 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:50:56 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static int	ft_write_upto(const char *s, char endchar)
 	return (ret);
 }
 
-static int ft_handler(char type, va_list args)
+static int	ft_handler(char type, va_list args)
 {
 	if (type == 'c')
-		return (ft_putchar(va_arg(args, char)));
+		return (ft_putchar(va_arg(args, int)));
 	if (type == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	if (type == 'p')
@@ -33,39 +33,53 @@ static int ft_handler(char type, va_list args)
 	if (type == '%')
 		return (write(1, "%", 1));
 	if (type == 'i' || type == 'd')
-		return (ft_putnbr_base(va_arg(args, int), "0123456789", 10));
+		return (ft_putnbr(va_arg(args, int), "0123456789", 10));
 	if (type == 'u')
-		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789", 10));
+		return (ft_putnbr(va_arg(args, unsigned int), "0123456789", 10));
 	if (type == 'x')
-		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef", 10));
+		return (ft_putnbr(va_arg(args, unsigned int), "0123456789abcdef", 16));
 	if (type == 'X')
-		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF", 10));
+		return (ft_putnbr(va_arg(args, unsigned int), "0123456789ABCDEF", 16));
 	return (0);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
+	int		res;
 	int		index;
+	int		readed;
 
 	if (!s)
 		return (-1);
 	va_start(args, s);
 	index = 0;
-	index += ft_write_upto(s, '%') + 1;
-	if (!s[index - 1])
-		return (index - 1);
-	if (s[index])
-		ft_handler(s[index], args);
-	return (0);
+	res = 0;
+	readed = 0;
+	while (s[index])
+	{
+		readed = ft_write_upto(&s[index], '%');
+		res += readed;
+		index += readed;
+		if (!s[index])
+			return (res);
+		if (s[index + 1])
+		{
+			res += ft_handler(s[index + 1], args);
+			index += 2;
+		}
+	}
+	return (res);
 }
 
-int main()
-{
-	void *test;
-	
-	printf("test %X", -218);
-	printf("\n");
-	ft_printf("test %X", -218);
-	return (0);
-}
+// #include <stdio.h>
+// int main()
+// {
+// 	void *test;
+// 	int i = printf("test %c %s %p %% %i %u %x %X", 'b', "bonjour", test, 1234, 90823098, 89171, 182930750);
+// 	printf("\n");
+// 	int j = ft_printf("test %c %s %p %% %i %u %x %X", 'b', "bonjour", test, 1234, 90823098, 89171, 182930750);
+// 	printf("\n");
+// 	printf("%i %i", i, j);
+// 	return (0);
+// }
