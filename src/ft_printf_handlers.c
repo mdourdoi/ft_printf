@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_printf_handlers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 13:14:03 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/12 13:57:52 by mdourdoi         ###   ########.fr       */
+/*   Created: 2025/11/26 13:45:54 by mdourdoi          #+#    #+#             */
+/*   Updated: 2025/11/27 18:02:04 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+int	ft_voidp_writer(void *vp)
 {
-	size_t	i;
+	if (!vp)
+		return (write(1, "(nil)", 5));
+	write(1, "0x", 2);
+	return (ft_putnbr((ssize_t)vp, "0123456789abcdef", 16) + 2);
+}
 
-	i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (src[i] && (i < size - 1))
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = 0;
-	return (ft_strlen(src));
+int	ft_putchar(char arg)
+{
+
+	return (write(1, &arg, 1));
+}
+
+int	ft_putstr(char *arg)
+{
+	if (!arg)
+		return (write(1, "(null)", 6));
+	return (write(1, arg, ft_strlen(arg)));
 }
