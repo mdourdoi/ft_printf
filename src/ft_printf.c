@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:29:04 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/27 18:02:06 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/27 18:14:16 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ int	ft_printf(const char *s, ...)
 	return (res);
 }
 
+#include <limits.h>
 int main()
 {
-	int i = ft_printf(" %c %c %c ", '0', 0, '1');
+	int i = ft_printf(" %p %p ", LONG_MIN, LONG_MAX);
 	printf("\n");
-	int j = printf(" %c %c %c ", '0', 0, '1');
-	printf("\n %i %j");
+	int j = printf(" %p %p ", LONG_MIN, LONG_MAX);
+	printf("\n %i %i", i, j);
 }
