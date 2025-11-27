@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:29:04 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/27 18:14:16 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:00:33 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ static int	ft_handler(char type, va_list args)
 	if (type == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	if (type == 'p')
-		return (ft_voidp_writer(va_arg(args, void *)));
+		return (ft_voidp_writer(va_arg(args, size_t)));
 	if (type == '%')
 		return (write(1, "%", 1));
 	if (type == 'i' || type == 'd')
-		return (ft_putnbr(va_arg(args, int), "0123456789", 10));
+		return (ft_putnbr(va_arg(args, ssize_t), "0123456789", 10));
 	if (type == 'u')
-		return (ft_putnbr(va_arg(args, unsigned int), "0123456789", 10));
+		return (ft_putnbr_u(va_arg(args, size_t), "0123456789", 10));
 	if (type == 'x')
-		return (ft_putnbr(va_arg(args, unsigned int), "0123456789abcdef", 16));
+		return (ft_putnbr(va_arg(args, size_t), "0123456789abcdef", 16));
 	if (type == 'X')
-		return (ft_putnbr(va_arg(args, unsigned int), "0123456789ABCDEF", 16));
+		return (ft_putnbr(va_arg(args, size_t), "0123456789ABCDEF", 16));
 	return (0);
 }
 
@@ -74,8 +74,8 @@ int	ft_printf(const char *s, ...)
 #include <limits.h>
 int main()
 {
-	int i = ft_printf(" %p %p ", LONG_MIN, LONG_MAX);
+	int i = ft_printf(" %d ", -1);
 	printf("\n");
-	int j = printf(" %p %p ", LONG_MIN, LONG_MAX);
+	int j = printf(" %d ", -1);
 	printf("\n %i %i", i, j);
 }

@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:30:59 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/27 18:13:11 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/27 18:57:23 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+# include <stdint.h>
 
 size_t	ft_strlen_upto(char const *s, char end);
 size_t	ft_strlen(const char *c);
-int		ft_putnbr(ssize_t n, char *str_base, int base);
-int		ft_voidp_writer(void *vp);
+int		ft_putnbr(ssize_t n, char *str_base, ssize_t base);
+int		ft_putnbr_u(size_t n, char *str_base, size_t base);
+int		ft_voidp_writer(size_t vp);
 int		ft_putchar(char arg);
 int		ft_putstr(char *arg);
 int		ft_printf(const char *s, ...);

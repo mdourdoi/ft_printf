@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:36:37 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/27 18:02:05 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:00:53 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,41 @@ size_t	ft_strlen(const char *c)
 	return (res);
 }
 
-static ssize_t	ft_abs(ssize_t n)
+static size_t	ft_abs(size_t n)
 {
 	if (n < 0)
 		return (-n);
 	return (n);
 }
 
-int	ft_putnbr(ssize_t n, char *str_base, int base)
+int	ft_putnbr(ssize_t n, char *str_base, ssize_t base)
 {
-	int	div;
-	int	mod;
-	int	ret;
-	int	sign;
+	ssize_t	div;
+	ssize_t	mod;
+	ssize_t	ret;
+	ssize_t	sign;
+
+	sign = 0;
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		sign++;
+	}
+	div = ft_abs(n / base);
+	mod = ft_abs(n % base);
+	if (div == 0)
+		return (write(1, &str_base[mod], 1));
+	ret = ft_putnbr(div, str_base, base);
+	write(1, &str_base[mod], 1);
+	return (ret + 1 + sign);
+}
+
+int	ft_putnbr_u(size_t n, char *str_base, size_t base)
+{
+	size_t	div;
+	size_t	mod;
+	size_t	ret;
+	size_t	sign;
 
 	sign = 0;
 	if (n < 0)
