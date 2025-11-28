@@ -12,6 +12,8 @@ OBJ_DIR = .obj/
 SRCS = $(addprefix $(SRC_DIR), \
 	ft_printf_handlers.c \
 	ft_printf_utils.c \
+	ft_printf_nbrs.c \
+	ft_printf_nbrs_unsigned.c \
 	ft_printf.c)
 
 HEADERS = $(addprefix $(INC_DIR), ft_printf.h)
@@ -29,6 +31,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 
 clean:
 	$(RM) $(OBJS)
+	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

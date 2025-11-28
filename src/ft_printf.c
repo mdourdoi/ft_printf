@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:29:04 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/27 19:00:33 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/28 15:56:51 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static int	ft_handler(char type, va_list args)
 	if (type == '%')
 		return (write(1, "%", 1));
 	if (type == 'i' || type == 'd')
-		return (ft_putnbr(va_arg(args, ssize_t), "0123456789", 10));
+		return (ft_putnbr((ssize_t)va_arg(args, int), "0123456789", 10));
 	if (type == 'u')
-		return (ft_putnbr_u(va_arg(args, size_t), "0123456789", 10));
+		return (ft_putnbr_u((size_t)va_arg(args, long), "0123456789", 10));
 	if (type == 'x')
-		return (ft_putnbr(va_arg(args, size_t), "0123456789abcdef", 16));
+		return (ft_putnbr_u((size_t)va_arg(args, long), "0123456789abcdef", 16));
 	if (type == 'X')
-		return (ft_putnbr(va_arg(args, size_t), "0123456789ABCDEF", 16));
+		return (ft_putnbr_u((size_t)va_arg(args, long), "0123456789ABCDEF", 16));
 	return (0);
 }
 
@@ -75,8 +75,8 @@ int	ft_printf(const char *s, ...)
 #include <stdio.h>
 int main()
 {
-	int i = ft_printf("%d", -1);
+	int i = ft_printf(" %p %p ", LONG_MIN, LONG_MAX);
 	printf("\n");
-	int j = printf("%d", -1);
+	int j = printf(" %p %p ", LONG_MIN, LONG_MAX);
 	printf("\n %i %i", i, j);
 }
