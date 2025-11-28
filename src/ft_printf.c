@@ -72,10 +72,11 @@ int	ft_printf(const char *s, ...)
 }
 
 #include <limits.h>
+#include <stdio.h>
 int main()
 {
-	int i = ft_printf(" %d ", -1);
+	int i = ft_printf("%d", -1);
 	printf("\n");
-	int j = printf(" %d ", -1);
+	int j = printf("%d", -1);
 	printf("\n %i %i", i, j);
 }

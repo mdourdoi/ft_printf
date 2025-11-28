@@ -12,25 +12,17 @@
 
 #include "ft_printf.h"
 
-size_t	ft_strlen_upto(char const *s, char end)
+int	ft_putnbr_u(size_t n, char *str_base, size_t base)
 {
-	size_t	i;
+	size_t	div;
+	size_t	mod;
+	size_t	ret;
 
-	i = 0;
-	if (s)
-	{
-		while (s[i] && s[i] != end)
-			i++;
-	}
-	return (i);
-}
-
-size_t	ft_strlen(const char *c)
-{
-	size_t	res;
-
-	res = 0;
-	while (c[res])
-		res++;
-	return (res);
+	div = n / base;
+	mod = n % base;
+	if (div == 0)
+		return (write(1, &str_base[mod], 1));
+	ret = ft_putnbr(div, str_base, base);
+	write(1, &str_base[mod], 1);
+	return (ret + 1);
 }
