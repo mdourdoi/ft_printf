@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:29:04 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/28 15:56:51 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:02:58 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static int	ft_handler(char type, va_list args)
 	if (type == 'i' || type == 'd')
 		return (ft_putnbr((ssize_t)va_arg(args, int), "0123456789", 10));
 	if (type == 'u')
-		return (ft_putnbr_u((size_t)va_arg(args, long), "0123456789", 10));
+		return (ft_putnbr_u((size_t)va_arg(args, unsigned int), "0123456789", 10));
 	if (type == 'x')
-		return (ft_putnbr_u((size_t)va_arg(args, long), "0123456789abcdef", 16));
+		return (ft_putnbr_u((size_t)va_arg(args, unsigned int), "0123456789abcdef", 16));
 	if (type == 'X')
-		return (ft_putnbr_u((size_t)va_arg(args, long), "0123456789ABCDEF", 16));
+		return (ft_putnbr_u((size_t)va_arg(args, unsigned int), "0123456789ABCDEF", 16));
 	return (0);
 }
 
@@ -71,12 +71,12 @@ int	ft_printf(const char *s, ...)
 	return (res);
 }
 
-#include <limits.h>
-#include <stdio.h>
-int main()
-{
-	int i = ft_printf(" %p %p ", LONG_MIN, LONG_MAX);
-	printf("\n");
-	int j = printf(" %p %p ", LONG_MIN, LONG_MAX);
-	printf("\n %i %i", i, j);
-}
+// #include <limits.h>
+// #include <stdio.h>
+// int main()
+// {
+// 	int i = ft_printf(" %u ", LONG_MAX);
+// 	printf("\n");
+// 	int j = printf(" %u ", LONG_MAX);
+// 	printf("\n %i %i", i, j);
+// }

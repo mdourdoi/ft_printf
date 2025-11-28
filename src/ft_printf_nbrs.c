@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf_nbrs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:36:37 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/27 19:00:53 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:02:36 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_putnbr(ssize_t n, char *str_base, ssize_t base)
 	mod = ft_abs(n % base);
 	if (div == 0)
 		return (write(1, &str_base[mod], 1) + sign);
-	ret = ft_putnbr(div, str_base, base);
+	ret = ft_putnbr_u(div, str_base, base);
 	write(1, &str_base[mod], 1);
 	return (ret + 1 + sign);
 }
