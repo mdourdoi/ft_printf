@@ -6,7 +6,7 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 13:29:04 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/28 16:20:04 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/12/01 10:45:58 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_handler(char type, va_list args)
 	if (type == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	if (type == 'p')
-		return (ft_voidp_writer(va_arg(args, size_t)));
+		return (ft_voidp_writer(va_arg(args, void *)));
 	if (type == '%')
 		return (write(1, "%", 1));
 	if (type == 'i' || type == 'd')
@@ -60,13 +60,12 @@ int	ft_printf(const char *s, ...)
 		readed = ft_write_upto(&s[index], '%');
 		res += readed;
 		index += readed;
-		if (!s[index])
-			return (res);
+		if (!s[index] || !s[index + 1])
+			break ;
 		if (s[index + 1])
-		{
 			res += ft_handler(s[index + 1], args);
-			index += 2;
-		}
+		index += 2;
 	}
+	va_end(args);
 	return (res);
 }

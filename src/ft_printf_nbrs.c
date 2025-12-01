@@ -6,34 +6,30 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:36:37 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/28 16:20:14 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/12/01 10:46:30 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_abs(int n)
-{
-	if (n < 0)
-		return (-n);
-	return (n);
-}
-
 int	ft_putnb(int n, char *str_base, int base)
 {
-	int	div;
-	int	mod;
-	int	ret;
-	int	sign;
+	int		div;
+	int		mod;
+	int		ret;
+	int		sign;
+	long	nb;
 
+	nb = n;
 	sign = 0;
 	if (n < 0)
 	{
 		write(1, "-", 1);
+		nb *= -1;
 		sign++;
 	}
-	div = ft_abs(n / base);
-	mod = ft_abs(n % base);
+	div = nb / base;
+	mod = nb % base;
 	if (div == 0)
 		return (write(1, &str_base[mod], 1) + sign);
 	ret = ft_putnb(div, str_base, base);

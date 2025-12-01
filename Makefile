@@ -10,10 +10,10 @@ INC_DIR = includes/
 OBJ_DIR = .obj/
 
 SRCS = $(addprefix $(SRC_DIR), \
-	ft_printf_utils.c \
 	ft_printf_chars.c \
-	ft_printf_nbrs.c \
 	ft_printf_nbrs_unsigned.c \
+	ft_printf_nbrs.c \
+	ft_printf_utils.c \
 	ft_printf_voidp.c \
 	ft_printf.c)
 

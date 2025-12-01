@@ -6,20 +6,20 @@
 /*   By: mdourdoi <mdourdoi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:36:37 by mdourdoi          #+#    #+#             */
-/*   Updated: 2025/11/28 16:20:06 by mdourdoi         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:03:52 by mdourdoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_putvoidp(size_t n, char *str_base, size_t base)
+static int	ft_putvoidp(uintptr_t vp, char *str_base, size_t base)
 {
-	size_t	div;
-	size_t	mod;
-	size_t	ret;
+	uintptr_t	div;
+	uintptr_t	mod;
+	int			ret;
 
-	div = n / base;
-	mod = n % base;
+	div = (uintptr_t)vp / base;
+	mod = (uintptr_t)vp % base;
 	if (div == 0)
 		return (write(1, &str_base[mod], 1));
 	ret = ft_putvoidp(div, str_base, base);
@@ -27,10 +27,10 @@ static int	ft_putvoidp(size_t n, char *str_base, size_t base)
 	return (ret + 1);
 }
 
-int	ft_voidp_writer(size_t vp)
+int	ft_voidp_writer(void *vp)
 {
 	if (!vp)
 		return (write(1, "(nil)", 5));
 	write(1, "0x", 2);
-	return (ft_putvoidp(vp, "0123456789abcdef", 16) + 2);
+	return (ft_putvoidp((uintptr_t)vp, "0123456789abcdef", 16) + 2);
 }
